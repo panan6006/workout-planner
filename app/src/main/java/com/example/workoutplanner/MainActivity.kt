@@ -57,10 +57,11 @@ fun WorkoutPlannerApp() {
         }
     ) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Greeting(
-                name = "Android",
-                modifier = Modifier.padding(innerPadding)
-            )
+            when (currentDestination) {
+                AppDestinations.HOME -> HomeScreen(Modifier.padding(innerPadding))
+                AppDestinations.FAVORITES -> Greeting("favorites", Modifier.padding(innerPadding))
+                AppDestinations.PROFILE -> Greeting("profile", Modifier.padding(innerPadding))
+            }
         }
     }
 }
@@ -72,6 +73,14 @@ enum class AppDestinations(
     HOME("Home", R.drawable.ic_home),
     FAVORITES("Favorites", R.drawable.ic_favorite),
     PROFILE("Profile", R.drawable.ic_account_box),
+}
+
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier) {
+    Text(
+        text = "Homepage",
+        modifier = modifier
+    )
 }
 
 @Composable
